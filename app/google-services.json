@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "740641279154",
+    "firebase_url": "https://weprotectu-293f1.firebaseio.com",
+    "project_id": "weprotectu-293f1",
+    "storage_bucket": "weprotectu-293f1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:740641279154:android:492c16bdb645ee0537cdab",
+        "android_client_info": {
+          "package_name": "com.example.weprotectu"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "740641279154-0ncecr3dipecjs5dbvdn4f4t73qqjido.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.weprotectu",
+            "certificate_hash": "9d80f248fe33f5a55e021546e50739e99c737116"
+          }
+        },
+        {
+          "client_id": "740641279154-ptub8akhntv5e185bjbqjs2n60v1hk5k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDY_Vvrk2ahmwUPJ65mSSqVCvq-7Qt4ifs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "740641279154-ptub8akhntv5e185bjbqjs2n60v1hk5k.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -1,0 +1,2 @@
+rootProject.name='WeProtectU'
+include ':app'

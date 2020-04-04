@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".SignUp">
+    <EditText
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="200dp"
+        android:drawableLeft="@drawable/username_24dp"
+        android:hint="User Name"
+        android:layout_marginLeft="20dp"
+        android:inputType="text"
+        ></EditText>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Blood Group"
+        android:layout_marginLeft="20dp"
+        android:textStyle="bold"
+        android:textColor="#EC1818"
+        android:layout_marginTop="25dp"
+        ></TextView>
+    <Spinner
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="25sp"
+        android:entries="@array/bloodgroup">
+        ></Spinner>
+
+    </LinearLayout>
+    <Button
+        android:layout_width="136dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Create Account"
+        android:textAllCaps="false"
+        android:fontFamily="sans-serif-black"
+        android:layout_marginTop="50dp"
+        android:textStyle="bold"
+        android:textColor="#F8F1F1"
+        android:id="@+id/go"
+        android:background="#E63D51" />
+</LinearLayout>
+

@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Phone Number"
+        android:textSize="17dp"
+        android:layout_marginTop="200dp"
+        android:layout_marginLeft="40dp"
+        android:fontFamily="sans-serif-black"
+        android:textStyle="bold"></TextView>
+    <EditText
+        android:layout_width="300dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginTop="10dp"
+        android:layout_height="wrap_content"
+        android:inputType="phone"
+        android:hint="Enter 10-digit Mobile No"
+        android:drawableLeft="@drawable/ic_smartphone_black_24dp"
+        android:id="@+id/phno"></EditText>
+    <Button
+        android:layout_width="136dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Generate OTP"
+        android:fontFamily="sans-serif-black"
+        android:layout_marginTop="50dp"
+        android:textAllCaps="false"
+        android:textStyle="bold"
+        android:textColor="#F8F1F1"
+        android:id="@+id/go"
+        android:background="#E63D51" />
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:id="@+id/pb"
+        android:visibility="invisible"></ProgressBar>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Sending OTP"
+        android:layout_marginTop="20dp"
+        android:id="@+id/state"
+        android:visibility="invisible"></TextView>
+</LinearLayout>
