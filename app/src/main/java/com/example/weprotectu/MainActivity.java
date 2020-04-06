@@ -38,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
                 p=phno1.getText().toString();
                 if(p.length()==10)
                 {
+                    go1.setEnabled(false);
                     pb1.setVisibility(View.VISIBLE);
                     state1.setVisibility(View.VISIBLE);
                     phno1.setEnabled(false);
@@ -68,18 +69,28 @@ public class MainActivity extends AppCompatActivity {
     }
     final PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallbacks = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
         @Override
+        public void onCodeAutoRetrievalTimeOut(String s) {
+            super.onCodeAutoRetrievalTimeOut(s);
+        }
+
+        @Override
         public void onVerificationCompleted(PhoneAuthCredential phoneAuthCredential) {
 
         }
 
         @Override
         public void onVerificationFailed(FirebaseException e) {
+            Toast.makeText(MainActivity.this, "Unable to send OTP", Toast.LENGTH_SHORT).show();
+            go1.setEnabled(true);
+            pb1.setVisibility(View.INVISIBLE);
+            state1.setVisibility(View.INVISIBLE);
+            getCurrentFocus();
+            phno1.setEnabled(true);
 
         }
-
         @Override
         public void onCodeSent(String s, PhoneAuthProvider.ForceResendingToken forceResendingToken) {
-            String c = s;
+            String c = s+" "+p;
             Intent i=new Intent(MainActivity.this,VerifyOtp.class);
             i.putExtra("co",c);
             startActivity(i);

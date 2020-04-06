@@ -23,12 +23,13 @@
         android:id="@+id/enterotp"
         android:gravity="center"
         android:layout_gravity="center"
+        android:inputType="number"
         android:layout_marginTop="10dp"></EditText>
     <Button
         android:layout_width="136dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="Continue"
+        android:text="Verify OTP"
         android:fontFamily="sans-serif-black"
         android:layout_marginTop="30dp"
         android:textAllCaps="false"
@@ -36,5 +37,21 @@
         android:textColor="#F8F1F1"
         android:id="@+id/continu"
         android:background="#E63D51" />
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30dp"
+        android:layout_gravity="center"
+        android:visibility="invisible"
+        android:id="@+id/pb"></ProgressBar>
+
+    <TextView
+        android:id="@+id/state"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="30dp"
+        android:text="Verifying OTP"
+        android:visibility="invisible"></TextView>
 
 </LinearLayout>

@@ -6,13 +6,20 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".SignUp">
-    <EditText
-        android:layout_width="250dp"
+    <TextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="200dp"
+        android:text="User Name"
+        android:layout_marginLeft="45dp"
+        android:layout_marginTop="20dp"
+        android:textStyle="bold"></TextView>
+    <EditText
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
         android:drawableLeft="@drawable/username_24dp"
-        android:hint="User Name"
-        android:layout_marginLeft="20dp"
+        android:layout_marginLeft="40dp"
+        android:id="@+id/username1"
         android:inputType="text"
         ></EditText>
     <LinearLayout
@@ -23,31 +30,79 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Blood Group"
-        android:layout_marginLeft="20dp"
+        android:layout_marginLeft="40dp"
         android:textStyle="bold"
         android:textColor="#EC1818"
-        android:layout_marginTop="25dp"
+        android:layout_marginTop="40dp"
         ></TextView>
     <Spinner
-        android:layout_width="wrap_content"
+        android:layout_width="130dp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="25sp"
+        android:layout_marginTop="40sp"
+        android:id="@+id/bg"
         android:entries="@array/bloodgroup">
         ></Spinner>
-
     </LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Phone Number"
+        android:layout_marginLeft="45dp"
+        android:layout_marginTop="40dp"
+        android:textStyle="bold"></TextView>
+    <EditText
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:drawableLeft="@drawable/ic_smartphone_black_24dp"
+        android:id="@+id/phnum1"
+        android:layout_marginLeft="40dp"
+        android:inputType="text"
+        android:textStyle="bold"
+        ></EditText>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Gender"
+        android:layout_marginLeft="45dp"
+        android:layout_marginTop="40dp"
+        android:textStyle="bold"></TextView>
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/gender"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="40dp">
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:id="@+id/female"
+            android:text="Female"></RadioButton>
+        <RadioButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/male"
+            android:text="Male"></RadioButton>
+        <RadioButton
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:id="@+id/tra"
+            android:text="Prefer not to say"></RadioButton>
+    </RadioGroup>
     <Button
-        android:layout_width="136dp"
+        android:layout_width="139dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:text="Create Account"
+        android:text="Continue"
         android:textAllCaps="false"
         android:fontFamily="sans-serif-black"
         android:layout_marginTop="50dp"
         android:textStyle="bold"
         android:textColor="#F8F1F1"
-        android:id="@+id/go"
+        android:id="@+id/con1"
         android:background="#E63D51" />
+
 </LinearLayout>
 
