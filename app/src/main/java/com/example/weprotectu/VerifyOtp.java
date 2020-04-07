@@ -69,7 +69,7 @@ public class VerifyOtp extends AppCompatActivity {
                     enterotp1.setEnabled(true);
                     getCurrentFocus();
                 }
-                signInWithPhoneAuthCredential(credential);
+                    signInWithPhoneAuthCredential(credential);
             }
         });
 

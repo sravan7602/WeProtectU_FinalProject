@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
@@ -13,16 +14,22 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-public class SignUp extends AppCompatActivity {
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+public class SignUp extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
     String p;
     EditText phn;
-    RadioGroup rg;
-    RadioButton genbu;
-    String genres,usernameres,bgres;
-    Button b;
     EditText username;
-    int genid;
-    Spinner sp;
+    Spinner bgp1;
+    String bloodgroupres,genderres,usernameres;
+    RadioButton rb;
+    RadioGroup rg;
+    Button b;
+    FirebaseAuth fAuth;
+    FirebaseFirestore firestore;
+    DocumentReference docref;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,20 +39,37 @@ public class SignUp extends AppCompatActivity {
         p=i.getStringExtra("phnumber");
         phn.setText(p);
         phn.setEnabled(false);
-        sp=(Spinner)findViewById(R.id.bg);
         username=(EditText)findViewById(R.id.username1);
-        usernameres=username.getText().toString();
-        rg=(RadioGroup)findViewById(R.id.gender);
-        genid=rg.getCheckedRadioButtonId();
-        genbu=(RadioButton)findViewById(genid);
-        genres=genbu.getText().toString();
-        bgres=sp.getSelectedItem().toString();
+        bgp1=(Spinner)findViewById(R.id.bg);
+        ArrayAdapter<CharSequence> adapter=ArrayAdapter.createFromResource(this,R.array.bloodgroup,android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        bgp1.setAdapter(adapter);
+        bgp1.setOnItemSelectedListener(this);
         b=(Button)findViewById(R.id.con1);
+        rg=(RadioGroup)findViewById(R.id.gender);
+
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(SignUp.this, "Details:"+usernameres+" "+bgres+" "+genres, Toast.LENGTH_SHORT).show();
+                usernameres=username.getText().toString();
+                Toast.makeText(SignUp.this, "details: "+usernameres+" "+bloodgroupres+" "+genderres, Toast.LENGTH_SHORT).show();
             }
         });
+    }
+
+    @Override
+    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+        bloodgroupres=adapterView.getItemAtPosition(i).toString();
+    }
+
+    @Override
+    public void onNothingSelected(AdapterView<?> adapterView) {
+
+    }
+
+
+    public void onRadioButtonClick(View view) {
+        rb=(RadioButton)findViewById(rg.getCheckedRadioButtonId());
+        genderres=rb.getText().toString();
     }
 }

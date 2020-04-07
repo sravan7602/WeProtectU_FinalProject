@@ -7,14 +7,12 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Phone Number"
         android:textSize="17dp"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="150dp"
         android:layout_marginLeft="40dp"
         android:fontFamily="sans-serif-black"
         android:textStyle="bold"></TextView>
@@ -24,6 +22,7 @@
         android:layout_marginTop="10dp"
         android:layout_height="wrap_content"
         android:inputType="phone"
+        android:maxLength="10"
         android:hint="Enter 10-digit Mobile No"
         android:drawableLeft="@drawable/ic_smartphone_black_24dp"
         android:id="@+id/phno"></EditText>
