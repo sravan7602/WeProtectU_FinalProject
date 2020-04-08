@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".EmergencyContacts">
+<TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:gravity="center"
+    android:text="Add your Contacts to"
+    android:layout_marginTop="20dp"></TextView>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="Send SMS alert during Emergency"
+        android:layout_marginTop="5dp"></TextView>
+
+    <TextView
+        android:id="@+id/contact1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="33dp"
+        android:layout_marginTop="30dp"
+        android:text="Contact-1"
+        android:textStyle="bold"></TextView>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+    <EditText
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:hint="Mobile Number"
+        android:id="@+id/mobilenumber1"
+        android:layout_marginLeft="30dp"
+        android:drawableLeft="@drawable/ic_phone_black_24dp"></EditText>
+        <ImageView
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:src="@drawable/addcontact1"
+            android:id="@+id/add1"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"></ImageView>
+    <ImageView
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:src="@drawable/remove"
+        android:id="@+id/remove1"
+        android:layout_marginLeft="20dp"
+        android:layout_marginTop="8dp"></ImageView>
+
+    </LinearLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Contact-2"
+        android:layout_marginLeft="33dp"
+        android:layout_marginTop="30dp"
+        android:textStyle="bold"
+        android:id="@+id/contact2"></TextView>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <EditText
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:hint="Mobile Number"
+            android:id="@+id/mobilenumber2"
+            android:layout_marginLeft="30dp"
+            android:drawableLeft="@drawable/ic_phone_black_24dp"></EditText>
+        <ImageView
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:src="@drawable/addcontact1"
+            android:id="@+id/add2"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"></ImageView>
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@drawable/remove"
+            android:id="@+id/remove2"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="8dp"></ImageView>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Contact-3"
+        android:layout_marginLeft="33dp"
+        android:layout_marginTop="30dp"
+        android:textStyle="bold"
+        android:id="@+id/contact3"></TextView>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <EditText
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:hint="Mobile Number"
+            android:id="@+id/mobilenumber3"
+            android:layout_marginLeft="30dp"
+            android:drawableLeft="@drawable/ic_phone_black_24dp"></EditText>
+        <ImageView
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:src="@drawable/addcontact1"
+            android:id="@+id/add3"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"></ImageView>
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@drawable/remove"
+            android:id="@+id/remove3"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="8dp"></ImageView>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Contact-4"
+        android:layout_marginLeft="33dp"
+        android:layout_marginTop="30dp"
+        android:textStyle="bold"
+        android:id="@+id/contact4"></TextView>
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <EditText
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:hint="Mobile Number"
+            android:id="@+id/mobilenumber4"
+            android:layout_marginLeft="30dp"
+            android:drawableLeft="@drawable/ic_phone_black_24dp"></EditText>
+        <ImageView
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:src="@drawable/addcontact1"
+            android:id="@+id/add4"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"></ImageView>
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:src="@drawable/remove"
+            android:id="@+id/remove4"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="8dp"></ImageView>
+</LinearLayout>
+    <Button
+        android:layout_width="139dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="Create an Account"
+        android:textAllCaps="false"
+        android:fontFamily="sans-serif-black"
+        android:layout_marginTop="40dp"
+        android:textStyle="bold"
+        android:textColor="#F8F1F1"
+        android:id="@+id/ca"
+        android:onClick="next"
+        android:background="#E63D51" />
+</LinearLayout>

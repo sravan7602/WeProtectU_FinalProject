@@ -42,7 +42,6 @@ public class VerifyOtp extends AppCompatActivity {
         setContentView(R.layout.activity_verify_otp);
         fAuth=FirebaseAuth.getInstance();
         fstore=FirebaseFirestore.getInstance();
-        docref=fstore.collection("user").document(fAuth.getCurrentUser().getUid());
         enterotp1=(EditText)findViewById(R.id.enterotp);
         b=(Button)findViewById(R.id.continu);
         pb1=(ProgressBar)findViewById(R.id.pb);
@@ -66,7 +65,7 @@ public class VerifyOtp extends AppCompatActivity {
                     state1.setVisibility(View.INVISIBLE);
                     enterotp1.setError("Enter OTP");
                     enterotp1.setEnabled(true);
-                    getCurrentFocus();
+                    enterotp1.requestFocus();
                 }
                 else if(code.length()!=6)
                 {
@@ -75,9 +74,11 @@ public class VerifyOtp extends AppCompatActivity {
                     state1.setVisibility(View.INVISIBLE);
                     enterotp1.setError("Enter Valied OTP");
                     enterotp1.setEnabled(true);
-                    getCurrentFocus();
+                    enterotp1.requestFocus();
                 }
+                else {
                     signInWithPhoneAuthCredential(credential);
+                }
             }
         });
 
@@ -89,7 +90,6 @@ public class VerifyOtp extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             checkProfile();
-
                         } else {
                             if (task.getException() instanceof FirebaseAuthInvalidCredentialsException)
                             {
@@ -108,11 +108,15 @@ public class VerifyOtp extends AppCompatActivity {
     }
 
     private void checkProfile() {
+        docref=fstore.collection("user").document(fAuth.getUid());
         docref.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 if(documentSnapshot.exists()){
                     Toast.makeText(VerifyOtp.this, "Already a registered User", Toast.LENGTH_SHORT).show();
+                    Intent intent=new Intent(VerifyOtp.this,HomePage.class);
+                    startActivity(intent);
+                    finish();
                 }
                 else
                 {
@@ -126,13 +130,5 @@ public class VerifyOtp extends AppCompatActivity {
 
         });
     }
-    @Override
-    protected void onStart()
-    {
-        super.onStart();
-        if(fAuth.getCurrentUser()!=null)
-        {
-            checkProfile();
-        }
-    }
+
 }

@@ -12,9 +12,16 @@ import android.widget.TextClock;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.FirebaseException;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthProvider;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import org.w3c.dom.Document;
 
 import java.util.concurrent.TimeUnit;
 
@@ -24,6 +31,10 @@ public class MainActivity extends AppCompatActivity {
     Button go1;
     String p;
     ProgressBar pb1;
+    int res;
+    FirebaseAuth fAuth;
+    FirebaseFirestore firestore;
+    DocumentReference docref;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -97,4 +108,31 @@ public class MainActivity extends AppCompatActivity {
             finish();
         }
     };
+    @Override
+    protected void onStart() {
+        super.onStart();
+        firestore=FirebaseFirestore.getInstance();
+        if (fAuth.getInstance().getCurrentUser()!=null)
+        {
+            Toast.makeText(this, "Hello "+fAuth.getInstance().getCurrentUser().toString(), Toast.LENGTH_SHORT).show();
+            docref=firestore.collection("user").document(fAuth.getInstance().getUid());
+            docref.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                @Override
+                public void onSuccess(DocumentSnapshot documentSnapshot) {
+                    //Toast.makeText(MainActivity.this, "Bye", Toast.LENGTH_SHORT).show();
+                    if (documentSnapshot.exists()) {
+                        res = 1;
+                        //Toast.makeText(MainActivity.this, "res=1", Toast.LENGTH_SHORT).show();
+                        Intent i = new Intent(MainActivity.this, HomePage.class);
+                        startActivity(i);
+                    } else{
+                        res = 0;
+                        //Toast.makeText(MainActivity.this, "res=0", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+
+        }
+
+    }
 }

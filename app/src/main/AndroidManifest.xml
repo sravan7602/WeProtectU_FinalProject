@@ -11,7 +11,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme1"
         tools:replace="label">
-        <activity android:name=".EmergencyContacts"></activity>
+        <activity android:name=".HomePage"></activity>
+        <activity android:name=".EmergencyContacts" />
         <activity android:name=".SignUp" />
         <activity android:name=".VerifyOtp" />
         <activity android:name=".MainActivity">
@@ -22,5 +23,8 @@
             </intent-filter>
         </activity>
     </application>
+    <uses-permission android:name="android.permission.READ_CONTACTS" />
+
+
 
 </manifest>
