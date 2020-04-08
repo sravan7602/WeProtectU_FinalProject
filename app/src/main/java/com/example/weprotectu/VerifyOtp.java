@@ -40,6 +40,9 @@ public class VerifyOtp extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_verify_otp);
+        fAuth=FirebaseAuth.getInstance();
+        fstore=FirebaseFirestore.getInstance();
+        docref=fstore.collection("user").document(fAuth.getCurrentUser().getUid());
         enterotp1=(EditText)findViewById(R.id.enterotp);
         b=(Button)findViewById(R.id.continu);
         pb1=(ProgressBar)findViewById(R.id.pb);
@@ -49,8 +52,6 @@ public class VerifyOtp extends AppCompatActivity {
         String ar[]=c.split(" ");
         final String codeSent=ar[0];
         p=ar[1];
-        fAuth=FirebaseAuth.getInstance();
-        fstore=FirebaseFirestore.getInstance();
         b.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -107,7 +108,6 @@ public class VerifyOtp extends AppCompatActivity {
     }
 
     private void checkProfile() {
-        docref=fstore.collection("user").document(fAuth.getCurrentUser().getUid());
         docref.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
