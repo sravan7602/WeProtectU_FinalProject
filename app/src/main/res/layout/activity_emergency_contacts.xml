@@ -39,11 +39,12 @@
         android:hint="Mobile Number"
         android:id="@+id/mobilenumber1"
         android:layout_marginLeft="30dp"
+        android:textStyle="bold"
         android:drawableLeft="@drawable/ic_phone_black_24dp"></EditText>
         <ImageView
             android:layout_width="35dp"
             android:layout_height="35dp"
-            android:src="@drawable/addcontact1"
+            android:src="@drawable/addcontact3"
             android:id="@+id/add1"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="5dp"></ImageView>
@@ -53,6 +54,7 @@
         android:src="@drawable/remove"
         android:id="@+id/remove1"
         android:layout_marginLeft="20dp"
+        android:onClick="rem1"
         android:layout_marginTop="8dp"></ImageView>
 
     </LinearLayout>
@@ -74,11 +76,12 @@
             android:hint="Mobile Number"
             android:id="@+id/mobilenumber2"
             android:layout_marginLeft="30dp"
+            android:textStyle="bold"
             android:drawableLeft="@drawable/ic_phone_black_24dp"></EditText>
         <ImageView
             android:layout_width="35dp"
             android:layout_height="35dp"
-            android:src="@drawable/addcontact1"
+            android:src="@drawable/addcontact3"
             android:id="@+id/add2"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="5dp"></ImageView>
@@ -87,6 +90,7 @@
             android:layout_height="25dp"
             android:src="@drawable/remove"
             android:id="@+id/remove2"
+            android:onClick="rem2"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="8dp"></ImageView>
     </LinearLayout>
@@ -109,11 +113,12 @@
             android:hint="Mobile Number"
             android:id="@+id/mobilenumber3"
             android:layout_marginLeft="30dp"
+            android:textStyle="bold"
             android:drawableLeft="@drawable/ic_phone_black_24dp"></EditText>
         <ImageView
             android:layout_width="35dp"
             android:layout_height="35dp"
-            android:src="@drawable/addcontact1"
+            android:src="@drawable/addcontact3"
             android:id="@+id/add3"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="5dp"></ImageView>
@@ -122,6 +127,7 @@
             android:layout_height="25dp"
             android:src="@drawable/remove"
             android:id="@+id/remove3"
+            android:onClick="rem3"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="8dp"></ImageView>
     </LinearLayout>
@@ -143,12 +149,13 @@
             android:layout_height="wrap_content"
             android:hint="Mobile Number"
             android:id="@+id/mobilenumber4"
+            android:textStyle="bold"
             android:layout_marginLeft="30dp"
             android:drawableLeft="@drawable/ic_phone_black_24dp"></EditText>
         <ImageView
             android:layout_width="35dp"
             android:layout_height="35dp"
-            android:src="@drawable/addcontact1"
+            android:src="@drawable/addcontact3"
             android:id="@+id/add4"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="5dp"></ImageView>
@@ -157,6 +164,7 @@
             android:layout_height="25dp"
             android:src="@drawable/remove"
             android:id="@+id/remove4"
+            android:onClick="rem4"
             android:layout_marginLeft="20dp"
             android:layout_marginTop="8dp"></ImageView>
 </LinearLayout>
