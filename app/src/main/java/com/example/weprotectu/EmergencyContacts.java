@@ -1,5 +1,6 @@
 package com.example.weprotectu;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
@@ -14,17 +15,32 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.util.HashMap;
+import java.util.Map;
+
 public class EmergencyContacts extends AppCompatActivity {
     EditText mn1,mn2,mn3,mn4;
     TextView c1,c2,c3,c4;
+    Button CreateAccount;
+    String mnum1,mnum2,mnum3,mnum4;
     int res=0;
     ImageView add1,add2,add3,add4;
     ImageView remove1,remove2,remove3,remove4;
+    FirebaseAuth fAuth;
+    FirebaseFirestore fstore;
+    int count=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,6 +49,7 @@ public class EmergencyContacts extends AppCompatActivity {
         mn2 = (EditText) findViewById(R.id.mobilenumber2);
         mn3 = (EditText) findViewById(R.id.mobilenumber3);
         mn4 = (EditText) findViewById(R.id.mobilenumber4);
+        CreateAccount=(Button)findViewById(R.id.ca); 
         c1=(TextView)findViewById(R.id.contact1);
         c2=(TextView)findViewById(R.id.contact2);
         c3=(TextView)findViewById(R.id.contact3);
@@ -49,56 +66,105 @@ public class EmergencyContacts extends AppCompatActivity {
         add2=(ImageView)findViewById(R.id.add2);
         add3=(ImageView)findViewById(R.id.add3);
         add4=(ImageView)findViewById(R.id.add4);
-        if (ContextCompat.checkSelfPermission(EmergencyContacts.this,
-                Manifest.permission.READ_CONTACTS)
-                != PackageManager.PERMISSION_GRANTED) {
-            if (ActivityCompat.shouldShowRequestPermissionRationale(EmergencyContacts.this,
-                    Manifest.permission.READ_CONTACTS)) {
-                // Show an explanation to the user *asynchronously* -- don't block
-                // this thread waiting for the user's response! After the user
-                // sees the explanation, try again to request the permission.
-            } else {
-                // No explanation needed; request the permission
-                ActivityCompat.requestPermissions(EmergencyContacts.this,
-                        new String[]{Manifest.permission.READ_CONTACTS},
-                        7602);
-
-                // MY_PERMISSIONS_REQUEST_READ_CONTACTS is an
-                // app-defined int constant. The callback method gets the
-                // result of the request.
-            }
+        if(ContextCompat.checkSelfPermission(this,Manifest.permission.SEND_SMS)!=PackageManager.PERMISSION_GRANTED)
+        {
+            ActivityCompat.requestPermissions(EmergencyContacts.this,new String[]{Manifest.permission.SEND_SMS},7603);
         }
         else
         {
-            Toast.makeText(this, "permission granted", Toast.LENGTH_SHORT).show();
-            add1.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    addcontacts1();
+            Toast.makeText(this, "Permission Granted", Toast.LENGTH_SHORT).show();
+            nextfunction();
+        }
+        CreateAccount.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mnum1=mn1.getText().toString().trim();
+                mnum1=checknumber(mnum1);
+                mnum2=mn2.getText().toString().trim();
+                mnum2=checknumber(mnum2);
+                mnum3=mn3.getText().toString().trim();
+                mnum3=checknumber(mnum3);
+                mnum4=mn4.getText().toString().trim();
+                mnum4=checknumber(mnum4);
+                if(/*!mnum1.equals(mnum2) && !mnum2.equals(mnum3) && !mnum3.equals(mnum4) && !mnum3.equals(mnum1) && !mnum2.equals(mnum4)  && */ mnum1.length()!=0 && mnum1.length()!=0 && mnum2.length()!=0 && mnum3.length()!=0 && mnum4.length()!=0 )
+                {
+                    storingData();
                 }
-            });
-            add2.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    addcontacts2();
+                else
+                {
+                    Toast.makeText(EmergencyContacts.this, "Select Different Contacts or Valied Contacts ", Toast.LENGTH_SHORT).show();
                 }
-            });
-            add3.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    addcontacts3();
-                }
-            });
-            add4.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    addcontacts4();
-                }
-            });
+            }
+        });
 
+
+
+    }
+
+    private void storingData() {
+        fAuth=FirebaseAuth.getInstance();
+        fstore=FirebaseFirestore.getInstance();
+        Map<String,Object> user=new HashMap<>();
+        Intent ii=getIntent();
+        String a=ii.getStringExtra("keyvalues");
+        String arr[]=a.split(" ");
+        user.put("username",arr[0].replaceAll("$"," "));
+        user.put("bloodgroup",arr[1]);
+        user.put("gender",arr[2]);
+        user.put("Phonenumber",arr[3]);
+        user.put("EmergencyContact1",mnum1);
+        user.put("EmergencyContact2",mnum2);
+        user.put("EmergencyContact3",mnum3);
+        user.put("EmergencyContact4",mnum4);
+        DocumentReference docref=fstore.collection("user").document(fAuth.getCurrentUser().getUid());
+        docref.set(user).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if(task.isSuccessful()) {
+                    Toast.makeText(EmergencyContacts.this, "Contacts Inserted Succesfully", Toast.LENGTH_SHORT).show();
+                    Intent intent=new Intent(EmergencyContacts.this,HomePage.class);
+                    startActivity(intent);
+                }
+                else
+                {
+                    Toast.makeText(EmergencyContacts.this, "Unable to add data", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+        });
+
+    }
+
+    private String checknumber(String mobnum) {
+        mobnum=mobnum.replaceAll(" ","");
+        if(mobnum.length()==10)
+        {
+            count=count+1;
+            return("+91"+mobnum);
+        }
+        if(mobnum.length()==13){
+            count=count+1;
+            return(mobnum);
+        }
+        else
+        {
+            //Toast.makeText(this, "error here", Toast.LENGTH_SHORT).show();
+            return(mobnum);
         }
 
+    }
 
+    private void nextfunction() {
+        if (ContextCompat.checkSelfPermission(this,
+                Manifest.permission.READ_CONTACTS)
+                != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(EmergencyContacts.this,new String[]{Manifest.permission.READ_CONTACTS},7602);
+        }
+        else {
+            Toast.makeText(this, "permission granted", Toast.LENGTH_SHORT).show();
+            resultfunction();
+
+        }
     }
 
     private void addcontacts1() {
@@ -142,16 +208,32 @@ public class EmergencyContacts extends AppCompatActivity {
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     // permission was granted, yay! Do the
                     // contacts-related task you need to do.
+                    resultfunction();
 
 
                 } else {
                     // permission denied, boo! Disable the
                     // functionality that depends on this permission.
                     Toast.makeText(this, "Allow WeProtectU to access your contacts", Toast.LENGTH_SHORT).show();
+
+                    //ActivityCompat.requestPermissions(EmergencyContacts.this,new String[]{Manifest.permission.READ_CONTACTS},7602);
                     Intent i=new Intent(EmergencyContacts.this,VerifyOtp.class);
                     finish();
                 }
                 return;
+            }
+            case 7603:{
+                if(grantResults.length>0 && grantResults[0]==PackageManager.PERMISSION_GRANTED){
+                    Toast.makeText(this, "Request Accepted", Toast.LENGTH_SHORT).show();
+                    nextfunction();
+                }
+                else
+                {
+                    Toast.makeText(this, "Allow WeProtectU to Send SMS", Toast.LENGTH_SHORT).show();
+                    //ActivityCompat.requestPermissions(EmergencyContacts.this,new String[]{Manifest.permission.SEND_SMS},7602);
+                    Intent i=new Intent(EmergencyContacts.this,VerifyOtp.class);
+                    finish();
+                }
             }
 
             // other 'case' lines to check for other
@@ -303,5 +385,33 @@ public class EmergencyContacts extends AppCompatActivity {
     public void rem4(View view) {
         c4.setText("Contact-4");
         mn4.setText(null);
+    }
+    public void resultfunction()
+    {
+        add1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                addcontacts1();
+            }
+        });
+        add2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                addcontacts2();
+            }
+        });
+        add3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                addcontacts3();
+            }
+        });
+        add4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                addcontacts4();
+            }
+        });
+
     }
 }
