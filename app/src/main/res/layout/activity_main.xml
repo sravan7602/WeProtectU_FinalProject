@@ -37,6 +37,7 @@
         android:textStyle="bold"
         android:textColor="#F8F1F1"
         android:id="@+id/go"
+
         android:background="#E63D51" />
     <ProgressBar
         android:layout_width="wrap_content"

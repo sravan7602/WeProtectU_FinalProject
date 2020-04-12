@@ -86,13 +86,13 @@ public class EmergencyContacts extends AppCompatActivity {
                 mnum3=checknumber(mnum3);
                 mnum4=mn4.getText().toString().trim();
                 mnum4=checknumber(mnum4);
-                if(/*!mnum1.equals(mnum2) && !mnum2.equals(mnum3) && !mnum3.equals(mnum4) && !mnum3.equals(mnum1) && !mnum2.equals(mnum4)  && */ mnum1.length()!=0 && mnum1.length()!=0 && mnum2.length()!=0 && mnum3.length()!=0 && mnum4.length()!=0 )
+                if(!mnum1.equals(mnum2) && !mnum2.equals(mnum3) && !mnum3.equals(mnum4) && !mnum3.equals(mnum1) && !mnum2.equals(mnum4)  && mnum1.length()!=0 && mnum1.length()!=0 && mnum2.length()!=0 && mnum3.length()!=0 && mnum4.length()!=0 )
                 {
                     storingData();
                 }
                 else
                 {
-                    Toast.makeText(EmergencyContacts.this, "Select Different Contacts or Valied Contacts ", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(EmergencyContacts.this, "Select four Different Contacts ", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -122,8 +122,9 @@ public class EmergencyContacts extends AppCompatActivity {
             public void onComplete(@NonNull Task<Void> task) {
                 if(task.isSuccessful()) {
                     Toast.makeText(EmergencyContacts.this, "Contacts Inserted Succesfully", Toast.LENGTH_SHORT).show();
-                    Intent intent=new Intent(EmergencyContacts.this,HomePage.class);
+                    Intent intent=new Intent(EmergencyContacts.this,PrimaryPage.class);
                     startActivity(intent);
+                    onPause();
                 }
                 else
                 {

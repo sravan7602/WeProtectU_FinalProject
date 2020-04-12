@@ -16,13 +16,18 @@ public class HomePage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page2);
-        b=(Button)findViewById(R.id.signoutb);
         fAuth=FirebaseAuth.getInstance();
     }
 
-    public void signout(View view) {
+    public void logout(View view) {
         fAuth.signOut();
         Intent i=new Intent(HomePage.this,MainActivity.class);
+        startActivity(i);
+        finish();
+    }
+
+    public void Editprofile(View view) {
+        Intent i=new Intent(HomePage.this,SignUp.class);
         startActivity(i);
         finish();
     }

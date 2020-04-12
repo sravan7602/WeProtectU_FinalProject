@@ -11,12 +11,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme1"
         tools:replace="label">
+        <activity android:name=".PrimaryPage"></activity>
         <activity android:name=".HomePage" />
         <activity android:name=".EmergencyContacts" />
         <activity android:name=".SignUp" />
         <activity android:name=".VerifyOtp" />
-        <activity android:name=".MainActivity"/>
-        <activity android:name=".SplashScreen"
+        <activity android:name=".MainActivity" />
+        <activity
+            android:name=".SplashScreen"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -25,8 +27,8 @@
             </intent-filter>
         </activity>
     </application>
-    <uses-permission android:name="android.permission.SEND_SMS" />
-
     <uses-permission android:name="android.permission.READ_CONTACTS" />
+
+    <uses-permission android:name="android.permission.SEND_SMS" />
 
 </manifest>

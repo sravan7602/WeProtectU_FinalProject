@@ -113,14 +113,14 @@ public class VerifyOtp extends AppCompatActivity {
             @Override
             public void onSuccess(DocumentSnapshot documentSnapshot) {
                 if(documentSnapshot.exists()){
-                    Toast.makeText(VerifyOtp.this, "Already a registered User", Toast.LENGTH_SHORT).show();
-                    Intent intent=new Intent(VerifyOtp.this,HomePage.class);
+                    //Toast.makeText(VerifyOtp.this, "Already a registered User", Toast.LENGTH_SHORT).show();
+                    Intent intent=new Intent(VerifyOtp.this,PrimaryPage.class);
                     startActivity(intent);
                     finish();
                 }
                 else
                 {
-                    Toast.makeText(VerifyOtp.this, "Verification Successful", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(VerifyOtp.this, "Verification Successful", Toast.LENGTH_SHORT).show();
                     Intent i2=new Intent(VerifyOtp.this,SignUp.class);
                     i2.putExtra("phnumber",p);
                     startActivity(i2);
