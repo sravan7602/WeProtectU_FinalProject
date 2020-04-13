@@ -7,6 +7,7 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
 import android.Manifest;
+import android.app.ProgressDialog;
 import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -21,11 +22,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.location.FusedLocationProviderClient;
+import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firestore.admin.v1beta1.Progress;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -40,11 +44,14 @@ public class EmergencyContacts extends AppCompatActivity {
     ImageView remove1,remove2,remove3,remove4;
     FirebaseAuth fAuth;
     FirebaseFirestore fstore;
+    ProgressDialog progressDialog;
     int count=0;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_emergency_contacts);
+        getSupportActionBar().setTitle("Emergency Contacts");
         mn1 = (EditText) findViewById(R.id.mobilenumber1);
         mn2 = (EditText) findViewById(R.id.mobilenumber2);
         mn3 = (EditText) findViewById(R.id.mobilenumber3);
@@ -108,6 +115,10 @@ public class EmergencyContacts extends AppCompatActivity {
         Intent ii=getIntent();
         String a=ii.getStringExtra("keyvalues");
         String arr[]=a.split(" ");
+        progressDialog=new ProgressDialog(EmergencyContacts.this);
+        progressDialog.show();
+        progressDialog.setContentView(R.layout.processdialogue);
+        progressDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
         user.put("username",arr[0].replaceAll("$"," "));
         user.put("bloodgroup",arr[1]);
         user.put("gender",arr[2]);
@@ -121,10 +132,10 @@ public class EmergencyContacts extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if(task.isSuccessful()) {
-                    Toast.makeText(EmergencyContacts.this, "Contacts Inserted Succesfully", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(EmergencyContacts.this, "Contacts Inserted Succesfully", Toast.LENGTH_SHORT).show();
                     Intent intent=new Intent(EmergencyContacts.this,PrimaryPage.class);
                     startActivity(intent);
-                    onPause();
+                    finish();
                 }
                 else
                 {
@@ -162,8 +173,8 @@ public class EmergencyContacts extends AppCompatActivity {
             ActivityCompat.requestPermissions(EmergencyContacts.this,new String[]{Manifest.permission.READ_CONTACTS},7602);
         }
         else {
-            Toast.makeText(this, "permission granted", Toast.LENGTH_SHORT).show();
-            resultfunction();
+            //Toast.makeText(this, "permission granted", Toast.LENGTH_SHORT).show();
+            checkforloaction();
 
         }
     }
@@ -172,28 +183,28 @@ public class EmergencyContacts extends AppCompatActivity {
         Intent i1=new Intent();
         i1.setAction(i1.ACTION_PICK);
         i1.setData(ContactsContract.Contacts.CONTENT_URI);
-        Toast.makeText(this, "activity started", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "activity started", Toast.LENGTH_SHORT).show();
         startActivityForResult(i1,0);
     }
     private void addcontacts2() {
         Intent i2=new Intent();
         i2.setAction(i2.ACTION_PICK);
         i2.setData(ContactsContract.Contacts.CONTENT_URI);
-        Toast.makeText(this, "activity started", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "activity started", Toast.LENGTH_SHORT).show();
         startActivityForResult(i2,1);
     }
     private void addcontacts3() {
         Intent i3=new Intent();
         i3.setAction(i3.ACTION_PICK);
         i3.setData(ContactsContract.Contacts.CONTENT_URI);
-        Toast.makeText(this, "activity started", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "activity started", Toast.LENGTH_SHORT).show();
         startActivityForResult(i3,2);
     }
     private void addcontacts4() {
         Intent i4=new Intent();
         i4.setAction(i4.ACTION_PICK);
         i4.setData(ContactsContract.Contacts.CONTENT_URI);
-        Toast.makeText(this, "activity started", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, "activity started", Toast.LENGTH_SHORT).show();
         startActivityForResult(i4,3);
     }
 
@@ -209,13 +220,13 @@ public class EmergencyContacts extends AppCompatActivity {
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     // permission was granted, yay! Do the
                     // contacts-related task you need to do.
-                    resultfunction();
+                    checkforloaction();
 
 
                 } else {
                     // permission denied, boo! Disable the
                     // functionality that depends on this permission.
-                    Toast.makeText(this, "Allow WeProtectU to access your contacts", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(this, "Allow WeProtectU to access your contacts to send your loaction to contacts", Toast.LENGTH_LONG).show();
 
                     //ActivityCompat.requestPermissions(EmergencyContacts.this,new String[]{Manifest.permission.READ_CONTACTS},7602);
                     Intent i=new Intent(EmergencyContacts.this,VerifyOtp.class);
@@ -235,6 +246,26 @@ public class EmergencyContacts extends AppCompatActivity {
                     Intent i=new Intent(EmergencyContacts.this,VerifyOtp.class);
                     finish();
                 }
+            }
+            case 7604: {
+                // If request is cancelled, the result arrays are empty.
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    // permission was granted, yay! Do the
+                    // contacts-related task you need to do.
+                    resultfunction();
+
+
+                } else {
+                    // permission denied, boo! Disable the
+                    // functionality that depends on this permission.
+                    Toast.makeText(this, "Allow WeProtectU to on GPS to send your loaction to contacts", Toast.LENGTH_LONG).show();
+
+                    //ActivityCompat.requestPermissions(EmergencyContacts.this,new String[]{Manifest.permission.READ_CONTACTS},7602);
+                    Intent i=new Intent(EmergencyContacts.this,VerifyOtp.class);
+                    finish();
+                }
+                return;
             }
 
             // other 'case' lines to check for other
@@ -368,7 +399,7 @@ public class EmergencyContacts extends AppCompatActivity {
     public void next(View view) {
         Intent i=new Intent(EmergencyContacts.this,HomePage.class);
         startActivity(i);
-        finish();
+
     }
 
     public void rem1(View view) {
@@ -387,6 +418,7 @@ public class EmergencyContacts extends AppCompatActivity {
         c4.setText("Contact-4");
         mn4.setText(null);
     }
+
     public void resultfunction()
     {
         add1.setOnClickListener(new View.OnClickListener() {
@@ -414,5 +446,23 @@ public class EmergencyContacts extends AppCompatActivity {
             }
         });
 
+    }
+
+    private void checkforloaction() {
+        if(ContextCompat.checkSelfPermission(this,Manifest.permission.ACCESS_COARSE_LOCATION)!=PackageManager.PERMISSION_GRANTED)
+        {
+            ActivityCompat.requestPermissions(EmergencyContacts.this,new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},7604);
+        }
+        else
+        {
+            Toast.makeText(this, "Permission Granted", Toast.LENGTH_SHORT).show();
+            resultfunction();
+        }
+    }
+
+    @Override
+    public void onBackPressed()
+    {
+        progressDialog.dismiss();
     }
 }

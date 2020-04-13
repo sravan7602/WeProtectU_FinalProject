@@ -3,6 +3,7 @@ package com.example.weprotectu;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -20,6 +21,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firestore.admin.v1beta1.Progress;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -34,6 +36,7 @@ public class SignUp extends AppCompatActivity implements AdapterView.OnItemSelec
     RadioGroup rg;
     Button b;
     String uid;
+    ProgressDialog progressDialog;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,6 +75,10 @@ public class SignUp extends AppCompatActivity implements AdapterView.OnItemSelec
                 {
                     usernameres=usernameres.replaceAll(" ","$");
                     String s=usernameres+" "+bloodgroupres+" "+genderres+" "+p;
+                    progressDialog=new ProgressDialog(SignUp.this);
+                    progressDialog.show();
+                    progressDialog.setContentView(R.layout.processdialogue);
+                    progressDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
                     Intent intent=new Intent(SignUp.this,EmergencyContacts.class);
                     intent.putExtra("keyvalues",s);
                     startActivity(intent);
@@ -95,4 +102,10 @@ public class SignUp extends AppCompatActivity implements AdapterView.OnItemSelec
         rb=(RadioButton)findViewById(rg.getCheckedRadioButtonId());
         genderres=rb.getText().toString();
     }
+    @Override
+    public void onBackPressed()
+    {
+        progressDialog.dismiss();
+    }
+
 }

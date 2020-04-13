@@ -40,9 +40,11 @@ public class SplashScreen extends AppCompatActivity {
                                 startActivity(i);
                                 finish();
                             } else{
-                                Intent i=new Intent(SplashScreen.this,SignUp.class);
-                                i.putExtra("phnumber",fAuth.getCurrentUser().getPhoneNumber().toString().substring(3,13));
+                                Intent i=new Intent(SplashScreen.this,MainActivity.class);
                                 startActivity(i);
+                                finish();
+                                //i.putExtra("phnumber",fAuth.getCurrentUser().getPhoneNumber().toString().substring(3,13));
+                                //startActivity(i);
                                 //Toast.makeText(MainActivity.this, "res=0", Toast.LENGTH_SHORT).show();
                             }
                         }
@@ -53,7 +55,7 @@ public class SplashScreen extends AppCompatActivity {
                 {
                     Intent i=new Intent(SplashScreen.this,MainActivity.class);
                     startActivity(i);
-                    Toast.makeText(SplashScreen.this, "User doesnot exist", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(SplashScreen.this, "User doesnot exist", Toast.LENGTH_SHORT).show();
                 }
             }
         },timeout);

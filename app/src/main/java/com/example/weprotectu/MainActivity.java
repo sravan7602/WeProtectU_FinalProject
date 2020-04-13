@@ -82,10 +82,12 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onCodeAutoRetrievalTimeOut(String s) {
             super.onCodeAutoRetrievalTimeOut(s);
+
         }
 
         @Override
         public void onVerificationCompleted(PhoneAuthCredential phoneAuthCredential) {
+            Toast.makeText(MainActivity.this, "no auto verification:", Toast.LENGTH_SHORT).show();
 
         }
 
@@ -125,6 +127,7 @@ public class MainActivity extends AppCompatActivity {
                         //Toast.makeText(MainActivity.this, "res=1", Toast.LENGTH_SHORT).show();
                         Intent i = new Intent(MainActivity.this, HomePage.class);
                         startActivity(i);
+                        finish();
                     } else{
                         res = 0;
                         //Toast.makeText(MainActivity.this, "res=0", Toast.LENGTH_SHORT).show();

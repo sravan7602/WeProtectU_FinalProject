@@ -26,6 +26,7 @@
         android:layout_gravity="center"
         android:onClick="emergency"
         android:textStyle="bold"
+        android:id="@+id/Emergency"
         android:background="@drawable/custombutton"></Button>
     <Button
         android:layout_width="180dp"

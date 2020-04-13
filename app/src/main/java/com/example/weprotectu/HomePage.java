@@ -16,6 +16,7 @@ public class HomePage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page2);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         fAuth=FirebaseAuth.getInstance();
     }
 
@@ -26,9 +27,5 @@ public class HomePage extends AppCompatActivity {
         finish();
     }
 
-    public void Editprofile(View view) {
-        Intent i=new Intent(HomePage.this,SignUp.class);
-        startActivity(i);
-        finish();
-    }
+
 }

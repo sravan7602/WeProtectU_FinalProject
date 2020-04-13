@@ -4,14 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#BF2F2F"
+    android:background="#FFFFFF"
     tools:context=".HomePage">
 
     <GridLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:alignmentMode="alignMargins"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:columnOrderPreserved="false"
         android:rowCount="3"
         android:columnCount="2">
@@ -32,12 +32,13 @@
                 <ImageView
                     android:layout_width="60dp"
                     android:layout_height="80dp"
-                    android:src="@drawable/policestation"></ImageView>
+                    android:src="@drawable/policestation2"></ImageView>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Nearest Police stations"
                     android:layout_gravity="center"
+                    android:textStyle="bold"
                     android:gravity="center"
                     android:textSize="18sp"
                     android:layout_marginTop="12dp"></TextView>
@@ -58,13 +59,16 @@
                 android:padding="16dp"
                 android:orientation="vertical">
                 <ImageView
-                    android:layout_width="60dp"
-                    android:layout_height="80dp"
-                    android:src="@drawable/hospitals"></ImageView>
+                    android:layout_width="80dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/hospitals3"></ImageView>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Nearest Hospitals"
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:textStyle="bold"
                     android:textSize="18sp"
                     android:layout_marginTop="12dp"></TextView>
             </LinearLayout>
@@ -84,16 +88,15 @@
                 android:padding="16dp"
                 android:orientation="vertical">
                 <ImageView
-                    android:layout_width="wrap_content"
+                    android:layout_width="100dp"
                     android:layout_height="80dp"
                     android:layout_gravity="center"
-                    android:onClick="Editprofile"
                     android:src="@drawable/editprofile"></ImageView>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Edit your Profile"
-                    android:onClick="Editprofile"
+                    android:textStyle="bold"
                     android:textSize="18sp"
                     android:layout_marginTop="12dp"></TextView>
             </LinearLayout>
@@ -122,6 +125,7 @@
                     android:text="Important Contacts"
                     android:layout_gravity="center"
                     android:gravity="center"
+                    android:textStyle="bold"
                     android:textSize="18sp"
                     android:layout_marginTop="12dp"></TextView>
             </LinearLayout>
@@ -145,12 +149,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="80dp"
                     android:layout_gravity="center"
-                    android:src="@drawable/aboutus"></ImageView>
+                    android:src="@drawable/mainlogo"></ImageView>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="About WeProtectU"
+                    android:layout_gravity="center"
+                    android:gravity="center"
                     android:textSize="18sp"
+                    android:textStyle="bold"
                     android:layout_marginTop="12dp"></TextView>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
@@ -172,7 +179,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="80dp"
                     android:onClick="logout"
-                    android:src="@drawable/logout"></ImageView>
+                    android:src="@drawable/logout1"></ImageView>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -180,6 +187,7 @@
                     android:onClick="logout"
                     android:layout_gravity="center"
                     android:gravity="center"
+                    android:textStyle="bold"
                     android:textSize="18sp"
                     android:layout_marginTop="12dp"></TextView>
             </LinearLayout>
