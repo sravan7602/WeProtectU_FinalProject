@@ -55,6 +55,7 @@ public class SplashScreen extends AppCompatActivity {
                 {
                     Intent i=new Intent(SplashScreen.this,MainActivity.class);
                     startActivity(i);
+                    finish();
                     //Toast.makeText(SplashScreen.this, "User doesnot exist", Toast.LENGTH_SHORT).show();
                 }
             }

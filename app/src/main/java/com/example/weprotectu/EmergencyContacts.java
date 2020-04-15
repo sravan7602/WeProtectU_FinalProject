@@ -109,16 +109,15 @@ public class EmergencyContacts extends AppCompatActivity {
     }
 
     private void storingData() {
+        //dialoguebox();
+        progressDialog=new ProgressDialog(EmergencyContacts.this);
+        progressDialog.setMessage("Loading");
         fAuth=FirebaseAuth.getInstance();
         fstore=FirebaseFirestore.getInstance();
         Map<String,Object> user=new HashMap<>();
         Intent ii=getIntent();
         String a=ii.getStringExtra("keyvalues");
         String arr[]=a.split(" ");
-        progressDialog=new ProgressDialog(EmergencyContacts.this);
-        progressDialog.show();
-        progressDialog.setContentView(R.layout.processdialogue);
-        progressDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
         user.put("username",arr[0].replaceAll("$"," "));
         user.put("bloodgroup",arr[1]);
         user.put("gender",arr[2]);
@@ -149,6 +148,7 @@ public class EmergencyContacts extends AppCompatActivity {
 
     private String checknumber(String mobnum) {
         mobnum=mobnum.replaceAll(" ","");
+        mobnum=mobnum.replaceAll("-","");
         if(mobnum.length()==10)
         {
             count=count+1;
@@ -180,6 +180,7 @@ public class EmergencyContacts extends AppCompatActivity {
     }
 
     private void addcontacts1() {
+
         Intent i1=new Intent();
         i1.setAction(i1.ACTION_PICK);
         i1.setData(ContactsContract.Contacts.CONTENT_URI);
@@ -399,7 +400,7 @@ public class EmergencyContacts extends AppCompatActivity {
     public void next(View view) {
         Intent i=new Intent(EmergencyContacts.this,HomePage.class);
         startActivity(i);
-
+        finish();
     }
 
     public void rem1(View view) {
@@ -424,29 +425,47 @@ public class EmergencyContacts extends AppCompatActivity {
         add1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //dialoguebox();
                 addcontacts1();
             }
         });
         add2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //dialoguebox();
                 addcontacts2();
             }
         });
         add3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //dialoguebox();
                 addcontacts3();
             }
         });
         add4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //dialoguebox();
                 addcontacts4();
             }
         });
 
     }
+
+    /*private void dialoguebox() {
+        progressDialog=new ProgressDialog(EmergencyContacts.this);
+        progressDialog.show();
+        progressDialog.setContentView(R.layout.processdialogue);
+        progressDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+
+    }
+    @Override
+    public void onBackPressed()
+    {
+        progressDialog.dismiss();
+    }
+    */
 
     private void checkforloaction() {
         if(ContextCompat.checkSelfPermission(this,Manifest.permission.ACCESS_COARSE_LOCATION)!=PackageManager.PERMISSION_GRANTED)
@@ -460,9 +479,5 @@ public class EmergencyContacts extends AppCompatActivity {
         }
     }
 
-    @Override
-    public void onBackPressed()
-    {
-        progressDialog.dismiss();
-    }
+
 }

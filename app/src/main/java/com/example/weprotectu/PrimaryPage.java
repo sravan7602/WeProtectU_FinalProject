@@ -5,10 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.location.Location;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.telephony.SmsManager;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.location.FusedLocationProviderClient;
@@ -24,9 +27,13 @@ public class PrimaryPage extends AppCompatActivity {
     FirebaseFirestore firestore;
     SmsManager smsManager=SmsManager.getDefault();
     DocumentReference docref;
-    String c1,c2,c3,c4,msg="";
-    ProgressDialog progressDialog;
+    String c1,c2,c3,c4,msg="(Test message dont respond) I am in trouble, my location is:\n"+"http://maps.google.com/maps?q=";
+    int count=0;
+    ProgressDialog progressdialog;
     Double latitude,longitude;
+    TextView textView;
+    Button emergency;
+    Intent i;
     //String la=Double.toString(latitude);
     //String lo=Double.toString(longitude);
     Button b;
@@ -35,8 +42,18 @@ public class PrimaryPage extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_primary_page);
+        /*try {
+            if(progressDialog!=null)
+            progressDialog.cancel();
+        }
+        catch(Exception e){
+            Toast.makeText(this, "exception is:"+e.getMessage(), Toast.LENGTH_SHORT).show();
+        }*/
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
-        b=(Button)findViewById(R.id.Emergency);
+        //getlocation();
+        textView=(TextView) findViewById(R.id.textreplace);
+        b=(Button)findViewById(R.id.mo);
+        emergency=(Button)findViewById(R.id.Emergency);
         fAuth=FirebaseAuth.getInstance();
         firestore=FirebaseFirestore.getInstance();
         docref=firestore.collection("user").document(fAuth.getCurrentUser().getUid());
@@ -52,41 +69,30 @@ public class PrimaryPage extends AppCompatActivity {
                 }
             }
         });
+        emergency.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                try{
+                    getlocation();
+                    Toast.makeText(PrimaryPage.this, "Alert sent to your Emergency Contacts:", Toast.LENGTH_SHORT).show();
+                    //textView.setText(msg);
+                    //Toast.makeText(this, "Message Sent", Toast.LENGTH_SHORT).show();
+                }
+                catch(Exception e)
+                {
+                    Toast.makeText(PrimaryPage.this, "error is:"+e.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        b.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i=new Intent(PrimaryPage.this,HomePage.class);
+                startActivity(i);
+                //finish();
+            }
+        });
     }
-
-    public void moreoptions(View view) {
-        progressDialog=new ProgressDialog(PrimaryPage.this);
-        progressDialog.show();
-        progressDialog.setContentView(R.layout.processdialogue);
-        progressDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
-        Intent i=new Intent(PrimaryPage.this,HomePage.class);
-        startActivity(i);
-        //finish();
-    }
-
-    public void emergency(View view) {
-        try{
-            getlocation();
-            String l=String.valueOf(latitude);
-            String lo=String.valueOf(longitude);
-            smsManager.sendTextMessage(c1,null,msg,null,null);
-            //Toast.makeText(this, "Message Sent", Toast.LENGTH_SHORT).show();
-            SmsManager smsManager2=SmsManager.getDefault();
-            smsManager2.sendTextMessage(c2,null,msg,null,null);
-            //Toast.makeText(this, "Message Sent", Toast.LENGTH_SHORT).show();
-            SmsManager smsManager3=SmsManager.getDefault();
-            smsManager3.sendTextMessage(c3,null,msg,null,null);
-            //Toast.makeText(this, "Message Sent", Toast.LENGTH_SHORT).show();
-            SmsManager smsManager4=SmsManager.getDefault();
-            smsManager4.sendTextMessage(c4,null,msg,null,null);
-            //Toast.makeText(this, "Message Sent", Toast.LENGTH_SHORT).show();
-        }
-        catch(Exception e)
-        {
-            Toast.makeText(this, "error is : "+e.getMessage().toString(), Toast.LENGTH_SHORT).show();
-        }
-    }
-
     private void getlocation() {
         fusedLocationClient.getLastLocation()
                 .addOnSuccessListener(this, new OnSuccessListener<Location>() {
@@ -96,12 +102,37 @@ public class PrimaryPage extends AppCompatActivity {
                         if (location != null) {
                             latitude=location.getLatitude();
                             longitude=location.getLongitude();
+                            count=count+1;
+                            Toast.makeText(PrimaryPage.this, "1", Toast.LENGTH_SHORT).show();
                             //Toast.makeText(PrimaryPage.this, "location:"+latitude+" "+longitude, Toast.LENGTH_SHORT).show();
-                            Toast.makeText(PrimaryPage.this, "Alert sent to your Emergency Contacts", Toast.LENGTH_SHORT).show();
-                            msg=msg+"(Test message dont respond) I am in trouble, my location is:\n"+"http://maps.google.com/maps?q="+latitude+","+longitude;
+                            msg=msg+latitude+","+longitude;
+                            //textView.setText(msg);
+                            smsManager.sendTextMessage(c1,null,msg,null,null);
+                            //Toast.makeText(this, "Message Sent", Toast.LENGTH_SHORT).show();
+                            SmsManager smsManager2=SmsManager.getDefault();
+                            smsManager2.sendTextMessage(c2,null,msg,null,null);
+                            //Toast.makeText(this, "Message Sent", Toast.LENGTH_SHORT).show();
+                            SmsManager smsManager3=SmsManager.getDefault();
+                            smsManager3.sendTextMessage(c3,null,msg,null,null);
+                            //Toast.makeText(this, "Message Sent", Toast.LENGTH_SHORT).show();
+                            SmsManager smsManager4=SmsManager.getDefault();
+                            smsManager4.sendTextMessage(c4,null,msg,null,null);
 
                         }
                     }
                 });
     }
+    /*private void dialoguebox() {
+        progressDialog=new ProgressDialog(PrimaryPage.this);
+        progressDialog.show();
+        progressDialog.setContentView(R.layout.processdialogue);
+        progressDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+
+    }
+    @Override
+    public void onBackPressed()
+    {
+        progressDialog.dismiss();
+    }*/
+
 }

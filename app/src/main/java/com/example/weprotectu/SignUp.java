@@ -75,10 +75,10 @@ public class SignUp extends AppCompatActivity implements AdapterView.OnItemSelec
                 {
                     usernameres=usernameres.replaceAll(" ","$");
                     String s=usernameres+" "+bloodgroupres+" "+genderres+" "+p;
-                    progressDialog=new ProgressDialog(SignUp.this);
+                    /*progressDialog=new ProgressDialog(SignUp.this);
                     progressDialog.show();
                     progressDialog.setContentView(R.layout.processdialogue);
-                    progressDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);
+                    progressDialog.getWindow().setBackgroundDrawableResource(android.R.color.transparent);*/
                     Intent intent=new Intent(SignUp.this,EmergencyContacts.class);
                     intent.putExtra("keyvalues",s);
                     startActivity(intent);
@@ -97,15 +97,14 @@ public class SignUp extends AppCompatActivity implements AdapterView.OnItemSelec
 
     }
 
-
     public void onRadioButtonClick(View view) {
         rb=(RadioButton)findViewById(rg.getCheckedRadioButtonId());
         genderres=rb.getText().toString();
     }
-    @Override
+    /*@Override
     public void onBackPressed()
     {
         progressDialog.dismiss();
-    }
+    }*/
 
 }

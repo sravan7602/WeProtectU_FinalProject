@@ -179,6 +179,5 @@
         android:textStyle="bold"
         android:textColor="#F8F1F1"
         android:id="@+id/ca"
-        android:onClick="next"
         android:background="#E63D51" />
 </LinearLayout>

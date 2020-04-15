@@ -14,7 +14,8 @@
         android:layout_gravity="center"
         android:gravity="center"
         android:layout_marginTop="150dp"
-        android:text="Click this button to send your location to your Emergency Contacts"></TextView>
+        android:text="Click this button to send your location to your Emergency Contacts"
+        android:id="@+id/textreplace"></TextView>
 
     <Button
         android:layout_width="200dp"
@@ -24,7 +25,6 @@
         android:textColor="#FFF"
         android:layout_marginTop="40dp"
         android:layout_gravity="center"
-        android:onClick="emergency"
         android:textStyle="bold"
         android:id="@+id/Emergency"
         android:background="@drawable/custombutton"></Button>
@@ -36,7 +36,7 @@
         android:textColor="#F8F1F1"
         android:layout_gravity="center"
         android:gravity="center"
-        android:onClick="moreoptions"
+        android:id="@+id/mo"
         android:layout_marginTop="70dp"></Button>
 
 </LinearLayout>
